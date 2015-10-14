@@ -1,8 +1,14 @@
-﻿Build started 10/14/2015 3:20:53 AM.
+﻿Build started 10/14/2015 3:35:04 AM.
      1>Project "D:\git\LoboRender\opengl\opengl\opengl.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"x64\Debug\opengl.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt opengl.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"x64\Debug\opengl.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt LoboRender.cpp opengl.cpp
+         LoboRender.cpp
+     1>LoboRender.cpp(37): warning C4305: 'initializing' : truncation from 'double' to 'GLfloat'
+     1>LoboRender.cpp(46): warning C4305: 'initializing' : truncation from 'double' to 'GLfloat'
+         Generating Code...
+         Compiling...
          opengl.cpp
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\git\LoboRender\opengl\x64\Debug\opengl.exe" /INCREMENTAL /NOLOGO freeglut.lib glew32.lib glu32.lib opengl32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\git\LoboRender\opengl\x64\Debug\opengl.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\git\LoboRender\opengl\x64\Debug\opengl.lib" /MACHINE:X64 x64\Debug\opengl.res
          x64\Debug\LoadShaders.obj
@@ -15,4 +21,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.60
+Time Elapsed 00:00:01.04

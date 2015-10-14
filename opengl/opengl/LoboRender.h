@@ -1,7 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
-
+#include <iostream>
 #include "LoadShaders.h"
 #include "tiny_obj_loader.h"
 

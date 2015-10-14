@@ -1,10 +1,8 @@
-#version 330 core
+#version 400 core
 
-in vec4 color;
-
-out vec4 fColor; // fragment’s final color
+out vec4 fColor;
 
 void main()
 {
-	fColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	fColor = vec4( 0.0, 0.0, 1.0, 1.0 );
 }

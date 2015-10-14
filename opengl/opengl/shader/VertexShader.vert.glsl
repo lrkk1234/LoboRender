@@ -1,9 +1,6 @@
-#version 330 core
+#version 400 core
 
-in vec4 vPosition;
-
-
-out vec4 color;
+layout( location = 0 ) in vec4 vPosition;
 
 void main()
 {

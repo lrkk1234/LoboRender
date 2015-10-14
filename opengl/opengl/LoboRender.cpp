@@ -45,7 +45,6 @@ void LoboRender::Init()
 		{ 0.85, 0.90, 1, 1 },
 	};
 
-
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 	
@@ -65,8 +64,8 @@ void LoboRender::Init()
 	GLuint program = LoadShaders(shaders);
 	glUseProgram(program);
 
-	GLuint vPosition = glGetAttribLocation(program, "vPosistion");
-	glDisableVertexAttribArray(vPosition);
+	GLuint vPosition = glGetAttribLocation(program, "vPosition");
+	glEnableVertexAttribArray(vPosition);
 	glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 
 	glClearColor(0.0, 0.0, 0.0, 1.0);
