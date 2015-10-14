@@ -1,9 +1,9 @@
 #pragma once
 
 #include "stdafx.h"
-#include <iostream>
-#include <gl\glew.h>
-#include <gl\glut.h>
+
+#include "LoadShaders.h"
+#include "tiny_obj_loader.h"
 
 
 class LoboRender
@@ -16,7 +16,12 @@ public:
 	virtual void Draw();
 	virtual void Update();
 
-	void SetUpWindow(int argc, char* argv[]);
 
+private:
+	std::vector<tinyobj::shape_t> shapes_;
+	std::vector<tinyobj::material_t> materials_;
+
+	GLuint vao; //vertex array object
+	GLuint buffers;
 };
 

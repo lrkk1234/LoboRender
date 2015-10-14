@@ -144,11 +144,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LoadShaders.h" />
     <ClInclude Include="LoboRender.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="tiny_obj_loader.h" />
+    <ClInclude Include="vmath.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LoadShaders.cpp" />
     <ClCompile Include="LoboRender.cpp" />
     <ClCompile Include="opengl.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -157,6 +162,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="tiny_obj_loader.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="opengl.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader\FragmentShader.fg.glsl" />
+    <None Include="shader\VertexShader.vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
