@@ -1,0 +1,16 @@
+﻿Build started 10/13/2015 11:00:36 PM.
+     1>Project "D:\git\opengl\opengl\opengl.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\git\opengl\x64\Debug\opengl.exe" /INCREMENTAL /NOLOGO glut32.lib glu32.lib opengl32.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\git\opengl\x64\Debug\opengl.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\git\opengl\x64\Debug\opengl.lib" /MACHINE:X64 x64\Debug\opengl.obj
+         x64\Debug\stdafx.obj
+     1>opengl.obj : error LNK2019: unresolved external symbol glutInit referenced in function wmain
+     1>opengl.obj : error LNK2019: unresolved external symbol glutInitDisplayMode referenced in function wmain
+     1>opengl.obj : error LNK2019: unresolved external symbol glutInitWindowSize referenced in function wmain
+     1>opengl.obj : error LNK2019: unresolved external symbol glutMainLoop referenced in function wmain
+     1>opengl.obj : error LNK2019: unresolved external symbol glutCreateWindow referenced in function wmain
+     1>D:\git\opengl\x64\Debug\opengl.exe : fatal error LNK1120: 5 unresolved externals
+     1>Done Building Project "D:\git\opengl\opengl\opengl.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.12
