@@ -16,12 +16,12 @@ void resize(int width, int height)
 	const float ar = (float)width / (float)height;
 
 	glViewport(0, 0, width, height);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(90.0, (float)width / (float)height, 1, 100);
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//gluPerspective(90.0, (float)width / (float)height, 1, 100);
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
 
 }
 
@@ -30,7 +30,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	render = new LoboRender();
 	glutInit(&argc, (char**)argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(1024, 512);
+	glutInitWindowSize(512, 512);
 	glutCreateWindow("Lobo Render");
 	glewInit();
 	render->Init();

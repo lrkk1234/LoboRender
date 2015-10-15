@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "LoboRender.h"
-
+#include "vmath.h"
+//#include "common\shader.hpp"
 
 
 LoboRender::LoboRender()
@@ -16,8 +17,8 @@ void LoboRender::Draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glBindVertexArray(vao);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	//glBindVertexArray(vao);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glutSwapBuffers();
 
 }
@@ -27,22 +28,11 @@ void LoboRender::Init()
 	//read mesh
 	tinyobj::LoadObj(shapes_, materials_, "mesh/dragonlite.obj");
 
-	GLfloat vertices[6][4] = {
-		{ -0.9, -0.9 ,-6,1},
-		{ 0.85, -0.9, -6, 1 },
-		{ -0.9, 0.85, -6, 1 },
-		{ 0.90, -0.85, -6, 1 },
-		{ 0.90, 0.90, -6, 1 },
-		{ -0.85, 0.90, -6, 1 },
-	};
 	//vao config
-	GLfloat color[6][4] = {
-		{ 0.1, 0.9, 1, 1 },
-		{ 0.1, 0.9, 1, 1 },
-		{ 0.9, 0.1, 1, 1 },
-		{ 0.90, 0.85, 1, 1 },
-		{ 0.90, 0.90, 1, 1 },
-		{ 0.85, 0.90, 1, 1 },
+	static const GLfloat g_vertex_buffer_data[] = {
+		-1.0f, -1.0f, 0.0f,
+		1.0f, -1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f,
 	};
 
 	glGenVertexArrays(1, &vao);
@@ -50,8 +40,8 @@ void LoboRender::Init()
 	
 	glGenBuffers(1, &buffers);
 	glBindBuffer(GL_ARRAY_BUFFER, buffers);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices),
-		vertices,
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data),
+		g_vertex_buffer_data,
 		GL_STATIC_DRAW
 		);
 
@@ -62,13 +52,27 @@ void LoboRender::Init()
 	};
 
 	GLuint program = LoadShaders(shaders);
+//	GLuint program = LoadShaders("shader/VertexShader.vert.glsl", "shader/FragmentShader.fg.glsl");
 	glUseProgram(program);
 
-	GLuint vPosition = glGetAttribLocation(program, "vPosition");
-	glEnableVertexAttribArray(vPosition);
-	glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+	GLuint MatrixID = glGetUniformLocation(program, "MVP");
+	vmath::mat4 projection = vmath::perspective(45.0f, 1.0f, 0.1f, 100.0f);
+	vmath::mat4 view = vmath::lookat(
+		vmath::vec3(0, 0, 2),
+		vmath::vec3(0, 0, 0),
+		vmath::vec3(0, 1, 0)
+		);
+	vmath::mat4 model = vmath::mat4().identity();
 
-	glClearColor(0.0, 0.0, 0.0, 1.0);
+	vmath::mat4 MVP = projection*view*model;
+	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+
+	GLuint vPosition = glGetAttribLocation(program, "vertexPosition_modelspace");
+	glEnableVertexAttribArray(vPosition);
+	//glBindBuffer(GL_ARRAY_BUFFER, buffers);
+	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+
+	glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
 }
 
 void LoboRender::Update()
