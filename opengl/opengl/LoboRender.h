@@ -15,13 +15,13 @@ public:
 	virtual void Init();
 	virtual void Draw();
 	virtual void Update();
-
+	virtual void Finalize();
 
 private:
-	std::vector<tinyobj::shape_t> shapes_;
-	std::vector<tinyobj::material_t> materials_;
 
 	GLuint vao; //vertex array object
 	GLuint buffers;
+
+	GLint render_modelviewprojection_loc;
 };
 

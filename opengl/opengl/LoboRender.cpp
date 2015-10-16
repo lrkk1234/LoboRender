@@ -11,6 +11,7 @@ LoboRender::LoboRender()
 
 LoboRender::~LoboRender()
 {
+	
 }
 
 void LoboRender::Draw()
@@ -25,15 +26,14 @@ void LoboRender::Draw()
 
 void LoboRender::Init()
 {
-	//read mesh
-	tinyobj::LoadObj(shapes_, materials_, "mesh/dragonlite.obj");
-
+	
 	//vao config
 	static const GLfloat g_vertex_buffer_data[] = {
 		-1.0f, -1.0f, 0.0f,
 		1.0f, -1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f
 	};
+
 
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
@@ -41,7 +41,7 @@ void LoboRender::Init()
 	glGenBuffers(1, &buffers);
 	glBindBuffer(GL_ARRAY_BUFFER, buffers);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data),
-		g_vertex_buffer_data,
+		&g_vertex_buffer_data[0],
 		GL_STATIC_DRAW
 		);
 
@@ -52,10 +52,9 @@ void LoboRender::Init()
 	};
 
 	GLuint program = LoadShaders(shaders);
-//	GLuint program = LoadShaders("shader/VertexShader.vert.glsl", "shader/FragmentShader.fg.glsl");
 	glUseProgram(program);
 
-	GLuint MatrixID = glGetUniformLocation(program, "MVP");
+	GLuint render_modelviewprojection_loc = glGetUniformLocation(program, "MVP");
 	vmath::mat4 projection = vmath::perspective(45.0f, 1.0f, 0.1f, 100.0f);
 	vmath::mat4 view = vmath::lookat(
 		vmath::vec3(0, 0, 2),
@@ -65,7 +64,7 @@ void LoboRender::Init()
 	vmath::mat4 model = vmath::mat4().identity();
 
 	vmath::mat4 MVP = projection*view*model;
-	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+	glUniformMatrix4fv(render_modelviewprojection_loc, 1, GL_FALSE, &MVP[0][0]);
 
 	GLuint vPosition = glGetAttribLocation(program, "vertexPosition_modelspace");
 	glEnableVertexAttribArray(vPosition);
@@ -78,5 +77,10 @@ void LoboRender::Init()
 void LoboRender::Update()
 {
 
+}
+
+void LoboRender::Finalize()
+{
+	glUseProgram(0);
 }
 

@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include "LoboRender.h"
+
 LoboRender* render;
 
 void draw()
