@@ -1,8 +1,4 @@
-//
-// Copyright 2012-2015, Syoyo Fujita.
-//
-// Licensed under 2-clause BSD liecense.
-//
+
 #ifndef _TINY_OBJ_LOADER_H
 #define _TINY_OBJ_LOADER_H
 

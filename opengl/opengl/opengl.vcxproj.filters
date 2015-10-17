@@ -71,5 +71,6 @@
   <ItemGroup>
     <None Include="shader\VertexShader.vert.glsl" />
     <None Include="shader\FragmentShader.fg.glsl" />
+    <None Include="opengl2.licenseheader" />
   </ItemGroup>
 </Project>
