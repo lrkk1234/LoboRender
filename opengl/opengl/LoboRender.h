@@ -45,11 +45,13 @@ private:
 	void CreateVAO();
 
 	vmath::mat4 MVP;
+	vmath::mat4 modelview;
+	vmath::mat4 projection;
 
 	GLuint vao; //vertex array object
 	GLuint buffers;
 	GLuint shader_program_;
-	GLuint render_modelviewprojection_loc;
+
 	std::vector<LoboModel*> model_list_;
 };
 

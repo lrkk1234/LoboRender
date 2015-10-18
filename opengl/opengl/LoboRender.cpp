@@ -33,7 +33,7 @@ LoboRender::~LoboRender()
 {
 	
 }
-
+ 
 void LoboRender::Draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -44,17 +44,20 @@ void LoboRender::Draw()
 		//gl bind VAO and VBO
 		glBindVertexArray(model_list_[i]->vertex_array_object_);
 		glBindBuffer(GL_ARRAY_BUFFER, model_list_[i]->vertex_buffer_object_);
-
-		//set MVP
-		GLuint render_modelviewprojection_loc = glGetUniformLocation(shader_program_, "MVP");
-		glUniformMatrix4fv(render_modelviewprojection_loc, 1, GL_FALSE, &MVP[0][0]);
-
+ 
 		//set vertex position buffer
 		GLuint vPosition = glGetAttribLocation(shader_program_, "vertexPosition_modelspace");
 		glEnableVertexAttribArray(vPosition);
 		glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 
-		//render
+		GLuint vNormal = glGetAttribLocation(shader_program_, "vnormal");
+		glEnableVertexAttribArray(vNormal);
+		glVertexAttribPointer(vNormal, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(model_list_[i]->norml_offset_));
+		
+		//
+		
+
+		//render 
 		glDrawArrays(GL_TRIANGLES, 0, model_list_[i]->vertics_size_);
 	}
 	glutSwapBuffers();
@@ -64,15 +67,26 @@ void LoboRender::Draw()
 void LoboRender::Init()
 {
 	//projection
-	vmath::mat4 projection = vmath::perspective(60.0f, 1.0f, 0.1f, 400.0f);
+	projection = vmath::perspective(60.0f, 1.0f, 0.1f, 400.0f);
 	vmath::mat4 view = vmath::lookat(
 		vmath::vec3(0, 5, 11),
 		vmath::vec3(0, 0, 0),
 		vmath::vec3(0, 1, 0)
 		);
 	vmath::mat4 model = vmath::mat4().identity();
+	//MVP = projection*view*model;
+	modelview = view*model;
 
-	MVP = projection*view*model;
+	//light position in modelview
+	vmath::vec4 lightposition(0.0f,2.0f,0.0f,1.0f);
+	float Shininess = 10;
+
+	//color
+	vmath::vec4 AmbientProduct(0.2f, 0.2f, 0.2f, 1.0f);
+	vmath::vec4 DiffuseProduct(1.0f, 1.0f, 1.0f, 1.0f);
+	vmath::vec4 SpecularProduct(1.0f, 1.0f, 1.0f, 1.0f);
+
+
 	//init VAO
 	CreateVAO();
 
@@ -84,7 +98,28 @@ void LoboRender::Init()
 	};
 	shader_program_ = LoadShaders(shaders);
 	glUseProgram(shader_program_);
-	
+	//set 
+	GLuint render_modelview_loc = glGetUniformLocation(shader_program_, "ModelView");
+	glUniformMatrix4fv(render_modelview_loc, 1, GL_FALSE, &modelview[0][0]);
+
+	GLuint render_projection_loc = glGetUniformLocation(shader_program_, "Projection");
+	glUniformMatrix4fv(render_projection_loc, 1, GL_FALSE, &projection[0][0]);
+
+	GLuint lightposition_loc = glGetUniformLocation(shader_program_, "LightPosition");
+	glUniform4fv(lightposition_loc, 1, &lightposition[0]);
+
+	GLuint AmbientProduct_loc = glGetUniformLocation(shader_program_, "AmbientProduct");
+	glUniform4fv(AmbientProduct_loc, 1, &AmbientProduct[0]);
+
+	GLuint DiffuseProduct_loc = glGetUniformLocation(shader_program_, "DiffuseProduct");
+	glUniform4fv(DiffuseProduct_loc, 1, &DiffuseProduct[0]);
+
+	GLuint SpecularProduct_loc = glGetUniformLocation(shader_program_, "SpecularProduct");
+	glUniform4fv(SpecularProduct_loc, 1, &SpecularProduct[0]);
+
+	GLuint Shininess_loc = glGetUniformLocation(shader_program_, "Shininess");
+	glUniform1f(Shininess_loc,Shininess);
+
 	//set background color
 	glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
 }
