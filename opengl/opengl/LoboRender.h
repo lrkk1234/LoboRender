@@ -48,6 +48,8 @@ private:
 	vmath::mat4 modelview;
 	vmath::mat4 projection;
 
+	float rotation;
+
 	GLuint vao; //vertex array object
 	GLuint buffers;
 	GLuint shader_program_;

@@ -36,7 +36,17 @@ LoboRender::~LoboRender()
  
 void LoboRender::Draw()
 {
+	glEnable(GL_POLYGON_SMOOTH);
+	glHint(GL_POLYGON_SMOOTH, GL_NICEST);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glUseProgram(shader_program_);
+
+	modelview = modelview* vmath::rotate(rotation, vmath::vec3(0, 1, 0));
+	//rotation += 0.1;
+	GLuint render_modelview_loc = glGetUniformLocation(shader_program_, "ModelView");
+	glUniformMatrix4fv(render_modelview_loc, 1, GL_FALSE, &modelview[0][0]);
 
 	//glBindVertexArray(vao);
 	for (size_t i = 0; i < model_list_.size(); i++)
@@ -66,11 +76,12 @@ void LoboRender::Draw()
 
 void LoboRender::Init()
 {
+	rotation = 0.1;
 	//projection
 	projection = vmath::perspective(60.0f, 1.0f, 0.1f, 400.0f);
 	vmath::mat4 view = vmath::lookat(
-		vmath::vec3(0, 5, 11),
-		vmath::vec3(0, 0, 0),
+		vmath::vec3(2, 2, 2),
+		vmath::vec3(0, 1, 0),
 		vmath::vec3(0, 1, 0)
 		);
 	vmath::mat4 model = vmath::mat4().identity();
@@ -78,13 +89,13 @@ void LoboRender::Init()
 	modelview = view*model;
 
 	//light position in modelview
-	vmath::vec4 lightposition(0.0f,2.0f,0.0f,1.0f);
-	float Shininess = 10;
+	vmath::vec4 lightposition(0.0f,0.0f,0.0f,1.0f);
+	float Shininess = 128;
 
 	//color
-	vmath::vec4 AmbientProduct(0.2f, 0.2f, 0.2f, 1.0f);
+	vmath::vec4 AmbientProduct(0.1f, 0.1f, 0.1f, 1.0f);
 	vmath::vec4 DiffuseProduct(1.0f, 1.0f, 1.0f, 1.0f);
-	vmath::vec4 SpecularProduct(1.0f, 1.0f, 1.0f, 1.0f);
+	vmath::vec4 SpecularProduct(0.5, 0.5, 0.5, 1.0f);
 
 
 	//init VAO

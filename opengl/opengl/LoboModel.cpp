@@ -31,9 +31,12 @@ LoboModel::LoboModel()
 
 LoboModel::LoboModel(const char* filename)
 {
+
 	LoadModel(filename);
-	LoadBuffer();
 	UpdateNorm();
+
+	LoadBuffer();
+	
 }
 
 LoboModel::~LoboModel()
@@ -103,20 +106,21 @@ void LoboModel::UpdateNorm()
 		}
 		for (size_t i = 0; i < shapes_[s].mesh.indices.size() / 3; i++)
 		{
+
 			vmath::vec3 v0(
-				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3]],
-				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3] + 1],
-				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3] + 2]
+				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3]*3],
+				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3]*3 + 1],
+				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3]*3 + 2]
 				);
 			vmath::vec3 v1(
-				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 1]],
-				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 1] + 1],
-				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 1] + 2]
+				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 1]*3],
+				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 1]*3 + 1],
+				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 1]*3 + 2]
 				);
 			vmath::vec3 v2(
-				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 2]],
-				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 2] + 1],
-				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 2] + 2]
+				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 2]*3],
+				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 2]*3 + 1],
+				shapes_[s].mesh.positions[shapes_[s].mesh.indices[i * 3 + 2]*3 + 2]
 				);
 
 			vmath::vec3 eg1 = v1 - v0;
@@ -130,15 +134,16 @@ void LoboModel::UpdateNorm()
 			}
 			normal = vmath::normalize(normal);
 
-			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3]] = normal[0];
-			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3] + 1] = normal[1];
-			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3] + 2] = normal[2];
-			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 1]] = normal[0];
-			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 1] + 1] = normal[1];
-			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 1] + 2] = normal[2];
-			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 2]] = normal[0];
-			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 2] + 1] = normal[1];
-			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 2] + 2] = normal[2];
+
+			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3]*3] = normal[0];
+			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3]*3 + 1] = normal[1];
+			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3]*3 + 2] = normal[2];
+			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 1]*3] = normal[0];
+			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 1]*3 + 1] = normal[1];
+			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 1]*3 + 2] = normal[2];
+			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 2]*3] = normal[0];
+			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 2]*3 + 1] = normal[1];
+			shapes_[s].mesh.normals[shapes_[s].mesh.indices[i * 3 + 2]*3 + 2] = normal[2];
 		}
 	}
 }

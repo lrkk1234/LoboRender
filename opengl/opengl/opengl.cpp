@@ -35,6 +35,7 @@ LoboRender* render;
 void draw()
 {
 	render->Draw();
+	glutPostRedisplay();
 }
 
 void resize(int width, int height)
@@ -46,7 +47,7 @@ void resize(int width, int height)
 
 void init()
 {
-	render->AddModel("mesh/dragonlite.obj");
+	render->AddModel("mesh/teapot.obj");
 	//render->AddModel("mesh/dragonlite.obj");
 	//render->AddModel("mesh/dragonlite.obj");
 	render->Init();
@@ -56,7 +57,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	render = new LoboRender();
 	glutInit(&argc, (char**)argv);
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_MULTISAMPLE);
 	glutInitWindowSize(512, 512);
 	glutCreateWindow("Lobo Render");
 	glewInit();

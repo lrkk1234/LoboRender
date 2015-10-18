@@ -1,27 +1,2 @@
-﻿Build started 10/18/2015 2:40:26 AM.
-     1>Project "D:\git\LoboRender\opengl\opengl\opengl.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"x64\Debug\opengl.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt stdafx.cpp
-         stdafx.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"x64\Debug\opengl.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt LoadShaders.cpp LoboModel.cpp LoboRender.cpp opengl.cpp tiny_obj_loader.cc
-         opengl.cpp
-         LoboRender.cpp
-         LoboModel.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         tiny_obj_loader.cc
-         LoadShaders.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\git\LoboRender\opengl\x64\Debug\opengl.exe" /INCREMENTAL /NOLOGO freeglut.lib glew32.lib glu32.lib opengl32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\git\LoboRender\opengl\x64\Debug\opengl.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\git\LoboRender\opengl\x64\Debug\opengl.lib" /MACHINE:X64 x64\Debug\opengl.res
-         x64\Debug\LoadShaders.obj
-         x64\Debug\LoboModel.obj
-         x64\Debug\LoboRender.obj
-         x64\Debug\opengl.obj
-         x64\Debug\stdafx.obj
-         x64\Debug\tiny_obj_loader.obj
-         opengl.vcxproj -> D:\git\LoboRender\opengl\x64\Debug\opengl.exe
-     1>Done Building Project "D:\git\LoboRender\opengl\opengl\opengl.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:00.89
+﻿  LINK : D:\Ran Luo\git\LoboRender\opengl\x64\Debug\opengl.exe not found or not built by the last incremental link; performing full link
+  opengl.vcxproj -> D:\Ran Luo\git\LoboRender\opengl\x64\Debug\opengl.exe
