@@ -17,9 +17,11 @@ uniform float Shininess;
 
 void main()
 {
-	vec3 tN = normalize(cross(dFdy(pos), dFdx(pos)));
+	vec3 tN = normalize(cross(dFdx(pos), dFdy(pos)));
 	//tN = N;
-
+	//it depends on your compute,if your result is black may need inverse tN;
+	//tN *= -1;
+	
 	vec3 H = normalize(L + E);
 	vec4 ambient = AmbientProduct;
 	float Kd = max(dot(L, tN), 0.0);
@@ -29,5 +31,4 @@ void main()
 	if (dot(L, tN) < 0.0)
 		specular = vec4(0.0, 0.0, 0.0, 1.0);
 	fColor = diffuse+specular+ambient;
-	//fColor.xyz = N;
 }

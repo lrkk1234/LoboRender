@@ -38,8 +38,7 @@ void LoboRender::Draw()
 {
 	/*glEnable(GL_POLYGON_SMOOTH);
 	glHint(GL_POLYGON_SMOOTH, GL_NICEST);*/
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_DEPTH_TEST);
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(shader_program_);
 
@@ -76,11 +75,17 @@ void LoboRender::Draw()
 
 void LoboRender::Init()
 {
+	//gl setting
+	glFrontFace(GL_CCW);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+
+
 	rotation = 0.1;
 	//projection
 	projection = vmath::perspective(60.0f, 1.0f, 0.1f, 400.0f);
 	vmath::mat4 view = vmath::lookat(
-		vmath::vec3(5, 3, 5),
+		vmath::vec3(5, 3, 5 ),
 		vmath::vec3(0, 2, 0),
 		vmath::vec3(0, 1, 0)
 		);
