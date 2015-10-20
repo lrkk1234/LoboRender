@@ -41,14 +41,15 @@ void draw()
 void resize(int width, int height)
 {
 	const float ar = (float)width / (float)height;
-
 	glViewport(0, 0, width, height);
+	render->Reshape(width, height);
+
 }
 
 void init()
 {
-	render->AddModel("mesh/teapot.obj");
-	//render->AddModel("mesh/dragonlite.obj");
+//	render->AddModel("mesh/dragonlite.obj");
+	render->AddModel("mesh/dragonlite.obj");
 	//render->AddModel("mesh/dragonlite.obj");
 	render->Init();
 }
@@ -66,6 +67,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	glutDisplayFunc(draw);
 	//glutKeyboardFunc(keyboard);
 	glutMainLoop();
-	return 0;
+	return 0; 
 }
 

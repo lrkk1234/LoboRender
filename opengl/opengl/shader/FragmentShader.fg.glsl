@@ -5,6 +5,7 @@ in vec3 pos;
 in vec3 N;
 in vec3 L;
 in vec3 E;
+
 out vec4 fColor;
 
 
@@ -16,16 +17,17 @@ uniform float Shininess;
 
 void main()
 {
+	vec3 tN = normalize(cross(dFdy(pos), dFdx(pos)));
+	//tN = N;
+
 	vec3 H = normalize(L + E);
-
 	vec4 ambient = AmbientProduct;
-	float Kd = max(dot(L, N), 0.0);
+	float Kd = max(dot(L, tN), 0.0);
 	vec4  diffuse = Kd*DiffuseProduct;
-	float Ks = pow(max(dot(N, H), 0.0), Shininess);
+	float Ks = pow(max(dot(tN, H), 0.0), Shininess);
 	vec4  specular = Ks * SpecularProduct;
-	if (dot(L, N) < 0.0)
+	if (dot(L, tN) < 0.0)
 		specular = vec4(0.0, 0.0, 0.0, 1.0);
-
 	fColor = diffuse+specular+ambient;
-	fColor.a =1;
+	//fColor.xyz = N;
 }

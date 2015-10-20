@@ -39,6 +39,7 @@ public:
 	virtual void Draw();
 	virtual void Update();
 	virtual void Finalize();
+	virtual void Reshape(int width, int hight);
 	virtual void AddModel(const char* filename);
 
 private:

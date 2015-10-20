@@ -36,8 +36,10 @@ public:
 
 	GLuint vertex_array_object_;
 	GLuint vertex_buffer_object_;
+	
 	int buffer_size_;
 	int norml_offset_;
+	//any other offset;
 
 	int vertics_size_;
 

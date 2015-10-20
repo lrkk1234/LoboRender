@@ -70,5 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="opengl2.licenseheader" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
