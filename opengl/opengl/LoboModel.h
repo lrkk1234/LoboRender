@@ -22,37 +22,37 @@ SOFTWARE.
 #pragma once
 #include "tiny_obj_loader.h"
 #include <assert.h>
-#include "vmath.h"
+#include <GL/gl.h>
+#include <GL/glu.h>
 
-// if this is not work on your application just use unsigned int directly
-// like: unsigned int vertex_array_object_; 
-#define unsigned int GLuint
+enum OBJ_BUFERS
+{
+	OBJ_VERTICES = 0,
+	OBJ_NORMALS,
+	OBJ_INDICES,
+	NUM_OBJ_BUFFERS
+};
+
+typedef struct {
+	GLuint              vao_;
+	std::vector<GLuint> vbo_;
+	int         num_indices_;
+} ShapeInfo;
 
 class LoboModel
 {
 public:
-	LoboModel();
 	LoboModel(const char* filename);
 	~LoboModel();
 
 	bool LoadModel(const char* filename);
-	void UpdateNorm();
-	float* GetVertexBuffer();
-
-	GLuint vertex_array_object_;
-	GLuint vertex_buffer_object_;
-	
-	int buffer_size_;
-	int norml_offset_;
-	//any other offset;
-
-	int vertics_size_;
+	void CreateVAO();
+	void Render();
 
 private:
-	void LoadBuffer();
 
 	std::vector<tinyobj::shape_t> shapes_;
 	std::vector<tinyobj::material_t> materials_;
-	std::vector<float> gl_vertex_buffer_;
+	std::vector<ShapeInfo> shapes_list_;
 };
 

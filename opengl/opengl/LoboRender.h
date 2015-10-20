@@ -21,12 +21,12 @@ SOFTWARE.
 */
 
 #pragma once
-
 #include "stdafx.h"
 #include <iostream>
 #include "LoadShaders.h"
 #include "tiny_obj_loader.h"
 #include "vmath.h"
+#include "LoboCamera.h"
 class LoboModel;
 
 class LoboRender
@@ -41,9 +41,10 @@ public:
 	virtual void Finalize();
 	virtual void Reshape(int width, int hight);
 	virtual void AddModel(const char* filename);
-
+	
 private:
-	void CreateVAO();
+	LoboCamera camera;
+
 
 	vmath::mat4 MVP;
 	vmath::mat4 modelview;
@@ -51,10 +52,7 @@ private:
 
 	float rotation;
 
-	GLuint vao; //vertex array object
-	GLuint buffers;
 	GLuint shader_program_;
-
 	std::vector<LoboModel*> model_list_;
 };
 

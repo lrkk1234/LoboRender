@@ -48,7 +48,7 @@ void resize(int width, int height)
 
 void init()
 {
-//	render->AddModel("mesh/dragonlite.obj");
+	render->AddModel("mesh/dragonlite.obj");
 	render->AddModel("mesh/bunny.obj");
 	//render->AddModel("mesh/dragonlite.obj");
 	render->Init();

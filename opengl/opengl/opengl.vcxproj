@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoadShaders.h" />
+    <ClInclude Include="LoboCamera.h" />
     <ClInclude Include="LoboModel.h" />
     <ClInclude Include="LoboRender.h" />
     <ClInclude Include="resource.h" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LoadShaders.cpp" />
+    <ClCompile Include="LoboCamera.cpp" />
     <ClCompile Include="LoboModel.cpp" />
     <ClCompile Include="LoboRender.cpp" />
     <ClCompile Include="opengl.cpp" />

@@ -40,34 +40,11 @@ void LoboRender::Draw()
 	glHint(GL_POLYGON_SMOOTH, GL_NICEST);*/
 	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUseProgram(shader_program_);
-
-	modelview = modelview* vmath::rotate(rotation, vmath::vec3(0, 1, 0));
-	//rotation += 0.1;
-	GLuint render_modelview_loc = glGetUniformLocation(shader_program_, "ModelView");
-	glUniformMatrix4fv(render_modelview_loc, 1, GL_FALSE, &modelview[0][0]);
-
+	camera.translate(0,rotation,0);
 	//glBindVertexArray(vao);
 	for (size_t i = 0; i < model_list_.size(); i++)
 	{
-		//gl bind VAO and VBO
-		glBindVertexArray(model_list_[i]->vertex_array_object_);
-		glBindBuffer(GL_ARRAY_BUFFER, model_list_[i]->vertex_buffer_object_);
- 
-		//set vertex position buffer
-		GLuint vPosition = glGetAttribLocation(shader_program_, "vertexPosition_modelspace");
-		glEnableVertexAttribArray(vPosition);
-		glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-
-		GLuint vNormal = glGetAttribLocation(shader_program_, "vnormal");
-		glEnableVertexAttribArray(vNormal);
-		glVertexAttribPointer(vNormal, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(model_list_[i]->norml_offset_));
-		
-		//
-		
-
-		//render 
-		glDrawArrays(GL_TRIANGLES, 0, model_list_[i]->vertics_size_);
+		model_list_[i]->Render();
 	}
 	glutSwapBuffers();
 
@@ -81,7 +58,7 @@ void LoboRender::Init()
 	glEnable(GL_DEPTH_TEST);
 
 
-	rotation = 0.1;
+	rotation = 0.01;
 	//projection
 	projection = vmath::perspective(60.0f, 1.0f, 0.1f, 400.0f);
 	vmath::mat4 view = vmath::lookat(
@@ -102,10 +79,6 @@ void LoboRender::Init()
 	vmath::vec4 DiffuseProduct(1.0f, 0.35f, 0.35f, 1.0f);
 	vmath::vec4 SpecularProduct(0.5, 0.5, 0.5, 1.0f);
 
-
-	//init VAO
-	CreateVAO();
-
 	//Create shader program
 	ShaderInfo shaders[] = {
 		{ GL_VERTEX_SHADER, "shader/VertexShader.vert.glsl" },
@@ -113,15 +86,15 @@ void LoboRender::Init()
 		{ GL_NONE, NULL }
 	};
 	shader_program_ = LoadShaders(shaders);
+	camera.bindShaderProgram(shader_program_);
 	glUseProgram(shader_program_);
 
+	camera.perspective(60.0f, 1.0f, 0.1f, 400.0f);
+	camera.lookat(vmath::vec3(5, 3, 5),
+		vmath::vec3(0, 2, 0),
+		vmath::vec3(0, 1, 0));
+
 	//set 
-	GLuint render_modelview_loc = glGetUniformLocation(shader_program_, "ModelView");
-	glUniformMatrix4fv(render_modelview_loc, 1, GL_FALSE, &modelview[0][0]);
-
-	GLuint render_projection_loc = glGetUniformLocation(shader_program_, "Projection");
-	glUniformMatrix4fv(render_projection_loc, 1, GL_FALSE, &projection[0][0]);
-
 	GLuint lightposition_loc = glGetUniformLocation(shader_program_, "LightPosition");
 	glUniform4fv(lightposition_loc, 1, &lightposition[0]);
 
@@ -153,26 +126,12 @@ void LoboRender::Finalize()
 
 void LoboRender::Reshape(int w, int h)
 {
-	projection = vmath::perspective(60.0f, (float)w/(float)h, 0.1f, 400.0f);
+	camera.perspective(60.0f, (float)w / (float)h, 0.1f, 400.0f);
+
+	/*projection = vmath::perspective(60.0f, (float)w/(float)h, 0.1f, 400.0f);
 	glUseProgram(shader_program_);
 	GLuint render_projection_loc = glGetUniformLocation(shader_program_, "Projection");
-	glUniformMatrix4fv(render_projection_loc, 1, GL_FALSE, &projection[0][0]);
-}
-
-void LoboRender::CreateVAO()
-{
-	for (size_t i = 0; i < model_list_.size(); i++)
-	{
-		glGenVertexArrays(1, &model_list_[i]->vertex_array_object_);
-		glBindVertexArray(model_list_[i]->vertex_array_object_);
-
-		glGenBuffers(1, &model_list_[i]->vertex_buffer_object_);
-		glBindBuffer(GL_ARRAY_BUFFER, model_list_[i]->vertex_buffer_object_);
-		glBufferData(GL_ARRAY_BUFFER, model_list_[i]->buffer_size_*sizeof(GLfloat),
-			model_list_[i]->GetVertexBuffer(),
-			GL_STATIC_DRAW
-			);
-	}
+	glUniformMatrix4fv(render_projection_loc, 1, GL_FALSE, &projection[0][0]);*/
 }
 
 void LoboRender::AddModel(const char* filename)

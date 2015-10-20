@@ -1,7 +1,7 @@
 #version 400 core
 
-in vec3 vertexPosition_modelspace;
-in vec3 vnormal;
+layout(location = 0) in vec3 vertexPosition_modelspace;
+layout(location = 1) in vec3 vnormal;
 
 out vec3 pos;
 out vec3 N;
@@ -21,6 +21,5 @@ void main()
 	L = normalize(LightPosition.xyz - pos);
 	E = normalize(-pos);
 	N = normalize(vec3(ModelView*vec4(vnormal,0)));
-	//gl_Position = Projection*ModelView*vec4(vertexPosition_modelspace, 1);
 	gl_Position = Projection*vec4(pos,1);
 }
