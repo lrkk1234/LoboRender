@@ -33,10 +33,9 @@ SOFTWARE.
 #include <iostream>
 #include <stdio.h>
 #include <tchar.h>
-#include "LoboRender.h"
 #include "vmath.h"
 #include "LoadShaders.h"
 #include "tiny_obj_loader.h"
-
+#include <assert.h>
 
 // TODO: reference additional headers your program requires here

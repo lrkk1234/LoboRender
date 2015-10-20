@@ -31,10 +31,8 @@ LoboModel::LoboModel()
 
 LoboModel::LoboModel(const char* filename)
 {
-
 	LoadModel(filename);
 	LoadBuffer();
-	
 }
 
 LoboModel::~LoboModel()
@@ -49,6 +47,21 @@ bool LoboModel::LoadModel(const char* filename)
 		std::cout << err << std::endl;
 		return false;
 	}
+
+	std::cout << std::endl;
+	std::cout << "OBJ LOADED: " << filename << std::endl;
+	std::cout << "# of shapes : " << shapes_.size() << std::endl;
+
+	for (size_t i = 0; i < shapes_.size(); i++) {
+		printf("shape[%ld].name = %s\n", i, shapes_[i].name.c_str());
+		printf("shape[%ld].indices: %ld\n", i, shapes_[i].mesh.indices.size());
+		assert((shapes_[i].mesh.indices.size() % 3) == 0);
+		printf("shape[%ld].vertices: %ld\n", i, shapes_[i].mesh.positions.size());
+		assert((shapes_[i].mesh.positions.size() % 3) == 0);
+		printf("shape[%ld].normals: %ld\n", i, shapes_[i].mesh.normals.size());
+		assert((shapes_[i].mesh.normals.size() % 3) == 0);
+	}
+
 	return true;
 }
 

@@ -21,6 +21,11 @@ SOFTWARE.
 */
 #pragma once
 #include "tiny_obj_loader.h"
+#include <assert.h>
+#include "vmath.h"
+
+// if this is not work on your application just use unsigned int directly
+// like: unsigned int vertex_array_object_; 
 #define unsigned int GLuint
 
 class LoboModel
