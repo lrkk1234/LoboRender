@@ -33,11 +33,13 @@ enum OBJ_BUFERS
 	NUM_OBJ_BUFFERS
 };
 
+//store vao vbo name for each Shape
 typedef struct {
 	GLuint              vao_;
 	std::vector<GLuint> vbo_;
 	int         num_indices_;
 } ShapeInfo;
+
 
 class LoboModel
 {
@@ -46,7 +48,9 @@ public:
 	~LoboModel();
 
 	bool LoadModel(const char* filename);
+	//create vao
 	void CreateVAO();
+	//render the result
 	void Render();
 
 private:

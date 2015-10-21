@@ -40,7 +40,7 @@ void LoboRender::Draw()
 	glHint(GL_POLYGON_SMOOTH, GL_NICEST);*/
 	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	camera.translate(0,rotation,0);
+	camera.rotateY(20*rotation);
 	//glBindVertexArray(vao);
 	for (size_t i = 0; i < model_list_.size(); i++)
 	{
@@ -59,16 +59,6 @@ void LoboRender::Init()
 
 
 	rotation = 0.01;
-	//projection
-	projection = vmath::perspective(60.0f, 1.0f, 0.1f, 400.0f);
-	vmath::mat4 view = vmath::lookat(
-		vmath::vec3(5, 3, 5 ),
-		vmath::vec3(0, 2, 0),
-		vmath::vec3(0, 1, 0)
-		);
-	vmath::mat4 model = vmath::mat4().identity();
-	//MVP = projection*view*model;
-	modelview = view*model;
 
 	//light position in modelview
 	vmath::vec4 lightposition(0.0f,1.0f,0.0f,1.0f);
